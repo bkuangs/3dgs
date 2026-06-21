@@ -1,0 +1,9 @@
+/data/
+.DS_Store
+node_modules/
+.env
+dist/
+.vscode/
+/build/
+CODEX.md
+CMakeLists.txt
