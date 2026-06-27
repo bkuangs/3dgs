@@ -7,3 +7,4 @@ dist/
 /build/
 CODEX.md
 CMakeLists.txt
+/docs/
