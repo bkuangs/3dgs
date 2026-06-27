@@ -1,3 +1,7 @@
+// Inputs: cameras.txt (camera intrinsics), images.txt (image poses and 2D observations), points3D.txt (3D world coords)
+// Outputs: 3x hash maps
+// Description: Turn COLMAP text files into C++ data structures
+
 #include "parse_colmap.hpp"
 
 #include <unordered_map>
