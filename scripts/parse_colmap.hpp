@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 struct TrackElement
@@ -51,4 +52,15 @@ struct Point3D {
     int g = 0;
     int b = 0;
     double error = 0.0;
+    std::vector<TrackElement> track;
 };
+
+std::unordered_map<long long, Point3D> parsePoints3D(const std::string& filePath);
+std::unordered_map<int, Image> parseImages(const std::string& filePath);
+std::unordered_map<int, Camera> parseCameras(const std::string& filePath);
+
+Mat3 quaternionToRotation(double qw, double qx, double qy, double qz);
+Vec3 multiply(const Mat3& r, const Vec3& v);
+Vec3 multiplyTranspose(const Mat3& r, const Vec3& v);
+Vec3 add(const Vec3& a, const Vec3& b);
+Vec3 negate(const Vec3& v);

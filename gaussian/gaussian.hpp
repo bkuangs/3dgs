@@ -1,4 +1,8 @@
+#pragma once
+
 #include <array>
+
+#include <glm/vec3.hpp>
 
 constexpr int SH_COUNT = 16;
 constexpr int SH_CHANNEL_COUNT = 3;

@@ -2,16 +2,28 @@
 // Outputs: .ply files
 // Description: Turn sparse point clouds into Gaussian blobs, as a PLY vertex
 
-#include "parse_colmap.cpp"
+#include "parse_colmap.hpp"
+
+#include <fstream>
+#include <iostream>
+#include <string>
 
 int main(int argc, char** argv)
 {
-    std::string sparseDir = "data/colmap/sparse";
-    std::string outputPath = "data/colmap/gaussians_init.ply";
+    const std::string sparseDir = argc > 1 ? argv[1] : "data/colmap/sparse";
+    const std::string outputPath = argc > 2 ? argv[2] : "data/colmap/gaussians_init.ply";
 
-    auto points = parsePoints3D(sparseDir + "/points3D.txt");
+    const auto points = parsePoints3D(sparseDir + "/points3D.txt");
+    if (points.empty()) {
+        std::cerr << "No points loaded from " << sparseDir << "/points3D.txt\n";
+        return 1;
+    }
 
     std::ofstream out(outputPath);
+    if (!out.is_open()) {
+        std::cerr << "Could not write " << outputPath << "\n";
+        return 1;
+    }
 
     out << "ply\n";
     out << "format ascii 1.0\n";
@@ -33,9 +45,9 @@ int main(int argc, char** argv)
     out << "end_header\n";
 
     for (const auto& [id, point] : points) {
-        out << point.x << " "
-            << point.y << " "
-            << point.z << " "
+        out << point.xyz.x << " "
+            << point.xyz.y << " "
+            << point.xyz.z << " "
             << point.r << " "
             << point.g << " "
             << point.b << " "
@@ -48,4 +60,7 @@ int main(int argc, char** argv)
             << 0.0f << " "
             << 0.0f << "\n";
     }
+
+    std::cout << "Wrote " << points.size() << " points to " << outputPath << "\n";
+    return 0;
 }
