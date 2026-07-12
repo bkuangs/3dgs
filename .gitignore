@@ -6,5 +6,8 @@ dist/
 .vscode/
 /build/
 CODEX.md
-/docs/
+/docs/*
+!/docs/format.md
+__pycache__/
 .venv/
+*.egg-info/

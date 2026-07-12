@@ -34,21 +34,28 @@ if (NOT TARGET glm::glm)
 endif()
 
 add_library(colmap_parser STATIC
-    scripts/parse_colmap.cpp
+    src/io/parse_colmap.cpp
 )
 target_include_directories(colmap_parser PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/scripts
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/io
 )
 
 add_executable(convert_colmap
-    gaussian/gaussian.cpp
+    src/tools/convert_colmap.cpp
 )
 target_link_libraries(convert_colmap PRIVATE
     colmap_parser
 )
 
+add_executable(validate_geom
+    src/tools/validate_geom.cpp
+)
+target_link_libraries(validate_geom PRIVATE
+    colmap_parser
+)
+
 add_executable(viewer
-    viewer/main.cpp
+    src/viewer/main.cpp
 )
 target_link_libraries(viewer PRIVATE
     colmap_parser

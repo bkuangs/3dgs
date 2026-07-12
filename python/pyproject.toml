@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gsplat"
+version = "0.0.0"
+description = "Python trainer for a minimal 3D Gaussian Splatting pipeline"
+requires-python = ">=3.10"
+dependencies = [
+    "torch",
+    "numpy",
+    "pillow",
+]
+
+[project.scripts]
+# gsplat-train = "gsplat.train:main"  # enable once train.py defines main()
+
+[tool.setuptools.packages.find]
+where = ["src"]

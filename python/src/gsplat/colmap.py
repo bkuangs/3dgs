@@ -168,8 +168,8 @@ def project(points_world: torch.Tensor, image: Image, camera: Camera) -> torch.T
 # Demo / verification
 # ---------------------------------------------------------------------------
 def main() -> None:
-    root = Path(__file__).resolve().parent.parent / "data" / "colmap" / "sparse"
-    images_dir = Path(__file__).resolve().parent.parent / "data" / "images" / "south-building" / "images"
+    root = Path(__file__).resolve().parents[3] / "data" / "colmap" / "sparse"
+    images_dir = Path(__file__).resolve().parents[3] / "data" / "images" / "south-building" / "images"
 
     cameras = read_cameras(root / "cameras.txt")
     images = read_images(root / "images.txt")
